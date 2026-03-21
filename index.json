@@ -1,0 +1,77 @@
+{
+  "web-dev": {
+    "name": "web-dev",
+    "description": "MCP servers and prompts for web development: browser automation, HTML/CSS tools, and HTTP inspection",
+    "authors": ["PackWeave"],
+    "license": "MIT",
+    "repository": "https://github.com/PackWeave/registry",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "url": "https://github.com/PackWeave/registry/releases/download/packs/web-dev-0.1.0.tar.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": null
+      }
+    ]
+  },
+  "rust-dev": {
+    "name": "rust-dev",
+    "description": "MCP servers and slash commands for Rust development: cargo integration, crates.io search, and compiler error explanations",
+    "authors": ["PackWeave"],
+    "license": "MIT",
+    "repository": "https://github.com/PackWeave/registry",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "url": "https://github.com/PackWeave/registry/releases/download/packs/rust-dev-0.1.0.tar.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": null
+      }
+    ]
+  },
+  "python-dev": {
+    "name": "python-dev",
+    "description": "MCP servers and prompts for Python development: package management, virtual environments, and debugging tools",
+    "authors": ["PackWeave"],
+    "license": "MIT",
+    "repository": "https://github.com/PackWeave/registry",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "url": "https://github.com/PackWeave/registry/releases/download/packs/python-dev-0.1.0.tar.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": null
+      }
+    ]
+  },
+  "git-tools": {
+    "name": "git-tools",
+    "description": "MCP servers and slash commands for git workflows: branch management, commit message generation, and conflict resolution",
+    "authors": ["PackWeave"],
+    "license": "MIT",
+    "repository": "https://github.com/PackWeave/registry",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "url": "https://github.com/PackWeave/registry/releases/download/packs/git-tools-0.1.0.tar.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": null
+      }
+    ]
+  },
+  "docs-writer": {
+    "name": "docs-writer",
+    "description": "Slash commands and system prompts for technical writing: README generation, API docs, and changelog formatting",
+    "authors": ["PackWeave"],
+    "license": "MIT",
+    "repository": "https://github.com/PackWeave/registry",
+    "versions": [
+      {
+        "version": "0.1.0",
+        "url": "https://github.com/PackWeave/registry/releases/download/packs/docs-writer-0.1.0.tar.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": null
+      }
+    ]
+  }
+}
