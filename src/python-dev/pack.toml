@@ -1,0 +1,8 @@
+[pack]
+name = "python-dev"
+version = "0.1.0"
+description = "System prompt and slash commands for Python development: best practices, typing, and tooling"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["python", "development", "typing", "best-practices"]

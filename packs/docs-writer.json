@@ -1,0 +1,26 @@
+{
+  "name": "docs-writer",
+  "description": "System prompt and slash commands for technical writing: READMEs, API docs, and changelogs",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "documentation",
+    "writing",
+    "readme",
+    "technical-writing"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "files": {
+        "commands/generate-readme.md": "Generate a README.md for this project.\n\nFirst, explore the repository to understand what it does:\n1. Read any existing README, package.json, Cargo.toml, pyproject.toml, or go.mod to understand the project name, description, and dependencies.\n2. Look at the entry point (main file, lib file, or index file) to understand the public API.\n3. Check for existing tests or examples to understand intended usage.\n4. Look for a LICENSE file to identify the license.\n\nThen produce a complete README.md with these sections. Each section must contain real, accurate information derived from the codebase — do not include placeholder text or HTML comments.\n\n- **Quick start** — minimal steps to get something working\n- **Installation** — all supported installation methods\n- **Usage** — the most common commands or API calls, with realistic examples\n- **Configuration** — config files, environment variables, and CLI flags\n- **Development** — how to build, test, and contribute\n- **License** — the license name and a link to the license file\n\nWrite the README in Markdown. Use code fences with language identifiers for all code blocks.\n",
+        "pack.toml": "[pack]\nname = \"docs-writer\"\nversion = \"0.1.0\"\ndescription = \"System prompt and slash commands for technical writing: READMEs, API docs, and changelogs\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"documentation\", \"writing\", \"readme\", \"technical-writing\"]\n",
+        "prompts/claude.md": "## Technical Writing Context\n\nYou are assisting with technical documentation. Apply these principles in all writing tasks:\n\n### Voice and tone\n- Write in active voice. \"The function returns X\" not \"X is returned by the function.\"\n- Address the reader as \"you\" and be direct.\n- Use present tense for documentation (\"The command installs…\" not \"The command will install…\").\n- Avoid filler phrases: \"simply\", \"just\", \"easily\", \"of course\", \"obviously\".\n\n### Structure\n- Lead with the most important information. State what something *does* before explaining *how* it works.\n- Use short paragraphs (3–5 sentences max).\n- Use numbered lists for sequential steps; bullet lists for unordered items.\n- Use code blocks for all command-line examples, code snippets, and file paths.\n- Every section heading should answer: \"What does the reader need to know here?\"\n\n### README format\nEvery README should contain, in order:\n1. **Project name + one-line description** (no badges in the first line)\n2. **Quick start** — the fastest path from zero to working (≤5 steps)\n3. **Installation** — all supported methods\n4. **Usage** — common commands with examples\n5. **Configuration** — options, env vars, config files\n6. **Contributing** — how to run tests and submit PRs\n7. **License**\n\n### API documentation\n- Every public function/method gets: purpose, parameters (name, type, description), return value, and at least one example.\n- Document error conditions and what callers should do.\n- Keep examples runnable and self-contained.\n\n### Changelogs\nFollow Keep a Changelog (https://keepachangelog.com): group changes under Added, Changed, Deprecated, Removed, Fixed, Security. Use past tense. Link to relevant issues and PRs.\n"
+      },
+      "dependencies": {}
+    }
+  ]
+}

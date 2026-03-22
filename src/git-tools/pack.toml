@@ -1,0 +1,15 @@
+[pack]
+name = "git-tools"
+version = "0.1.0"
+description = "Git operations via MCP plus a structured code review slash command"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["git", "version-control", "code-review", "mcp"]
+
+[[servers]]
+name = "git"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-git@latest"]
+transport = "stdio"
+tools = ["git_status", "git_diff_unstaged", "git_diff_staged", "git_commit", "git_add", "git_reset", "git_log", "git_create_branch", "git_checkout", "git_show", "git_diff"]

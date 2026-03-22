@@ -1,0 +1,20 @@
+[pack]
+name = "github"
+version = "0.1.0"
+description = "GitHub repos, issues, pull requests, and code search via MCP"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["github", "git", "issues", "pull-requests", "mcp"]
+
+[[servers]]
+name = "github"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github@latest"]
+transport = "stdio"
+tools = ["create_or_update_file", "search_repositories", "create_repository", "get_file_contents", "push_files", "create_issue", "create_pull_request", "fork_repository", "create_branch", "list_commits", "list_issues", "update_issue", "add_issue_comment", "search_code", "search_issues", "get_issue", "get_pull_request"]
+
+[servers.env.GITHUB_TOKEN]
+required = true
+secret = true
+description = "GitHub personal access token with repo scope"

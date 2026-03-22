@@ -1,0 +1,15 @@
+[pack]
+name = "sqlite"
+version = "0.1.0"
+description = "SQLite database access via MCP — read, write, and analyze local SQLite databases"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["sqlite", "database", "sql", "mcp"]
+
+[[servers]]
+name = "sqlite"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sqlite@latest"]
+transport = "stdio"
+tools = ["read_query", "write_query", "create_table", "list_tables", "describe_table", "append_insight"]

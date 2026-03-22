@@ -1,0 +1,25 @@
+{
+  "name": "filesystem",
+  "description": "Read and write local files via the MCP filesystem server",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "filesystem",
+    "files",
+    "mcp",
+    "read",
+    "write"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "files": {
+        "pack.toml": "[pack]\nname = \"filesystem\"\nversion = \"0.1.0\"\ndescription = \"Read and write local files via the MCP filesystem server\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"filesystem\", \"files\", \"mcp\", \"read\", \"write\"]\n\n[[servers]]\nname = \"filesystem\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-filesystem@latest\", \".\"]\ntransport = \"stdio\"\ntools = [\"read_file\", \"write_file\", \"list_directory\", \"create_directory\", \"move_file\", \"search_files\", \"get_file_info\"]\n"
+      },
+      "dependencies": {}
+    }
+  ]
+}

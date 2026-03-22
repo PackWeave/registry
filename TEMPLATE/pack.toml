@@ -1,0 +1,34 @@
+[pack]
+name = "your-pack-name"
+version = "0.1.0"
+description = "What this pack does in one sentence"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+repository = "https://github.com/you/your-pack"
+keywords = ["keyword1", "keyword2"]
+
+# MCP servers this pack provides.
+# Repeat [[servers]] blocks for multiple servers. Delete section if none.
+# [[servers]]
+# name = "server-name"           # Must be unique across all installed packs
+# command = "npx"                # For stdio transport (use url instead for HTTP)
+# args = ["-y", "@org/pkg@latest"]
+# transport = "stdio"            # "stdio" or "sse"
+# tools = ["tool1", "tool2"]     # Optional: subset of tools to expose
+#
+# # Declare environment variables the server needs (never store values here)
+# [servers.env.API_KEY]
+# required = true
+# secret = true
+# description = "Your API key — get one at https://example.com"
+
+# Which CLIs this pack targets. Omit this section entirely to target all CLIs.
+# [targets]
+# claude_code = true
+# gemini_cli = true
+# codex_cli = true
+
+# CLI-specific settings merged non-destructively into the CLI's settings file.
+# [extensions.claude_code]
+# # any valid Claude Code settings fragment, e.g.:
+# # hooks = { ... }

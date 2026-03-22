@@ -1,0 +1,15 @@
+[pack]
+name = "filesystem"
+version = "0.1.0"
+description = "Read and write local files via the MCP filesystem server"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["filesystem", "files", "mcp", "read", "write"]
+
+[[servers]]
+name = "filesystem"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem@latest", "."]
+transport = "stdio"
+tools = ["read_file", "write_file", "list_directory", "create_directory", "move_file", "search_files", "get_file_info"]

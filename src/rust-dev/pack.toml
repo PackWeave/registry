@@ -1,0 +1,8 @@
+[pack]
+name = "rust-dev"
+version = "0.1.0"
+description = "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["rust", "cargo", "clippy", "development"]

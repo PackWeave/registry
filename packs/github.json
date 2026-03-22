@@ -1,0 +1,25 @@
+{
+  "name": "github",
+  "description": "GitHub repos, issues, pull requests, and code search via MCP",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "github",
+    "git",
+    "issues",
+    "pull-requests",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "files": {
+        "pack.toml": "[pack]\nname = \"github\"\nversion = \"0.1.0\"\ndescription = \"GitHub repos, issues, pull requests, and code search via MCP\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"github\", \"git\", \"issues\", \"pull-requests\", \"mcp\"]\n\n[[servers]]\nname = \"github\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-github@latest\"]\ntransport = \"stdio\"\ntools = [\"create_or_update_file\", \"search_repositories\", \"create_repository\", \"get_file_contents\", \"push_files\", \"create_issue\", \"create_pull_request\", \"fork_repository\", \"create_branch\", \"list_commits\", \"list_issues\", \"update_issue\", \"add_issue_comment\", \"search_code\", \"search_issues\", \"get_issue\", \"get_pull_request\"]\n\n[servers.env.GITHUB_TOKEN]\nrequired = true\nsecret = true\ndescription = \"GitHub personal access token with repo scope\"\n"
+      },
+      "dependencies": {}
+    }
+  ]
+}

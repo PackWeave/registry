@@ -1,0 +1,24 @@
+{
+  "name": "brave-search",
+  "description": "Web and local search via the Brave Search API through MCP",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "search",
+    "brave",
+    "web",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "files": {
+        "pack.toml": "[pack]\nname = \"brave-search\"\nversion = \"0.1.0\"\ndescription = \"Web and local search via the Brave Search API through MCP\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"search\", \"brave\", \"web\", \"mcp\"]\n\n[[servers]]\nname = \"brave-search\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-brave-search@latest\"]\ntransport = \"stdio\"\ntools = [\"brave_web_search\", \"brave_local_search\"]\n\n[servers.env.BRAVE_API_KEY]\nrequired = true\nsecret = true\ndescription = \"Brave Search API key — get one at https://brave.com/search/api/\"\n"
+      },
+      "dependencies": {}
+    }
+  ]
+}
