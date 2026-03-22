@@ -6,34 +6,13 @@ First, explore the repository to understand what it does:
 3. Check for existing tests or examples to understand intended usage.
 4. Look for a LICENSE file to identify the license.
 
-Then produce a complete README.md following this structure:
+Then produce a complete README.md with these sections. Each section must contain real, accurate information derived from the codebase — do not include placeholder text or HTML comments.
 
-# <Project Name>
+- **Quick start** — minimal steps to get something working
+- **Installation** — all supported installation methods
+- **Usage** — the most common commands or API calls, with realistic examples
+- **Configuration** — config files, environment variables, and CLI flags
+- **Development** — how to build, test, and contribute
+- **License** — the license name and a link to the license file
 
-> One-sentence description of what this project does and who it's for.
-
-## Quick start
-
-<!-- Minimal steps to get something working -->
-
-## Installation
-
-<!-- All supported installation methods -->
-
-## Usage
-
-<!-- Most common commands/API calls with realistic examples -->
-
-## Configuration
-
-<!-- Config files, environment variables, CLI flags -->
-
-## Development
-
-<!-- How to build, test, and contribute -->
-
-## License
-
-<!-- License name and link -->
-
-Write the README in Markdown. Use code fences with language identifiers for all code blocks. Do not include placeholder text — every section should contain real, accurate information derived from the codebase.
+Write the README in Markdown. Use code fences with language identifiers for all code blocks.

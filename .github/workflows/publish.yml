@@ -29,4 +29,5 @@ jobs:
           git add packs/ index.json
           # Only commit if something actually changed
           git diff --cached --quiet || git commit -m "chore: regenerate pack registry from src/"
+          git pull --rebase
           git push

@@ -15,7 +15,6 @@ set to the highest semver version present in each packs/{name}.json.
 """
 
 import json
-import os
 import re
 import sys
 from pathlib import Path
@@ -84,6 +83,15 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         return {}
 
     meta = parse_pack_toml(pack_toml_path.read_text(encoding="utf-8"))
+
+    # Ensure pack.toml name matches the directory name to prevent registry inconsistencies.
+    if meta["name"] and meta["name"] != pack_name:
+        print(
+            f"  SKIP {pack_name}: pack.toml name '{meta['name']}' does not match directory name",
+            file=sys.stderr,
+        )
+        return {}
+
     version = meta["version"]
     if not version:
         print(f"  SKIP {pack_name}: version not found in pack.toml", file=sys.stderr)

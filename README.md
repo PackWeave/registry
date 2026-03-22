@@ -8,7 +8,7 @@ The official pack registry for [weave](https://github.com/PackWeave/weave) — a
 |------|-------------|
 | [brave-search](src/brave-search/pack.toml) | Web and local search via the Brave Search API through MCP |
 | [docs-writer](src/docs-writer/pack.toml) | System prompt and slash commands for technical writing |
-| [fetch](src/fetch/pack.toml) | HTTP fetch tool via MCP — retrieve web pages as markdown or raw text |
+| [fetch](src/fetch/pack.toml) | HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text |
 | [filesystem](src/filesystem/pack.toml) | Read and write local files via the MCP filesystem server |
 | [git-tools](src/git-tools/pack.toml) | Git operations via MCP plus a structured code review slash command |
 | [github](src/github/pack.toml) | GitHub repos, issues, pull requests, and code search via MCP |
