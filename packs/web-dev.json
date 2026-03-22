@@ -1,0 +1,25 @@
+{
+  "name": "web-dev",
+  "description": "Browser automation via Puppeteer MCP plus a web development system prompt",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "web",
+    "browser",
+    "puppeteer",
+    "automation",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/web-dev-0.1.0.tar.gz",
+      "sha256": "0571f0a4bebddb68a6fc34dc1268ee15941fa4ad577bef957ed33f2006f18fab",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

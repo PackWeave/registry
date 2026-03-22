@@ -1,0 +1,15 @@
+[pack]
+name = "web-dev"
+version = "0.1.0"
+description = "Browser automation via Puppeteer MCP plus a web development system prompt"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["web", "browser", "puppeteer", "automation", "mcp"]
+
+[[servers]]
+name = "puppeteer"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-puppeteer@latest"]
+transport = "stdio"
+tools = ["puppeteer_navigate", "puppeteer_screenshot", "puppeteer_click", "puppeteer_fill", "puppeteer_select", "puppeteer_hover", "puppeteer_evaluate"]

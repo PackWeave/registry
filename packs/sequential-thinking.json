@@ -1,0 +1,24 @@
+{
+  "name": "sequential-thinking",
+  "description": "Structured chain-of-thought reasoning via MCP \u2014 break down complex problems step by step",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "reasoning",
+    "chain-of-thought",
+    "thinking",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/sequential-thinking-0.1.0.tar.gz",
+      "sha256": "af5c37229fc7532605cca3f26ab64f52baa3ca0115391c51d236f7bee0a41e36",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

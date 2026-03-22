@@ -1,0 +1,8 @@
+[pack]
+name = "docs-writer"
+version = "0.1.0"
+description = "System prompt and slash commands for technical writing: READMEs, API docs, and changelogs"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["documentation", "writing", "readme", "technical-writing"]

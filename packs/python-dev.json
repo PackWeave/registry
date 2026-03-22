@@ -1,0 +1,24 @@
+{
+  "name": "python-dev",
+  "description": "System prompt and slash commands for Python development: best practices, typing, and tooling",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "python",
+    "development",
+    "typing",
+    "best-practices"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/python-dev-0.1.0.tar.gz",
+      "sha256": "fe49426303b482f3114c41d429bd8f97d2d8bb74a726561dcdf489e0d80de8fa",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

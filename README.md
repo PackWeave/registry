@@ -1,43 +1,70 @@
 # PackWeave Registry
 
-The official pack registry index for [weave](https://github.com/PackWeave/weave).
+The official pack registry for [weave](https://github.com/PackWeave/weave) — a CLI tool that manages MCP server configurations, slash commands, and system prompts across AI CLIs (Claude Code, Gemini CLI, Codex CLI).
 
-## Format
-
-`index.json` is a flat JSON object mapping pack names to their metadata. The schema mirrors the `RegistryIndex` struct in [`src/core/registry.rs`](https://github.com/PackWeave/weave/blob/main/src/core/registry.rs).
-
-```json
-{
-  "<pack-name>": {
-    "name": "<pack-name>",
-    "description": "Human-readable description",
-    "authors": ["author"],
-    "license": "MIT",
-    "repository": "https://github.com/...",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/.../releases/download/.../pack-0.1.0.tar.gz",
-        "sha256": "<64-char hex>",
-        "size_bytes": 12345
-      }
-    ]
-  }
-}
-```
-
-## Seed packs
+## Available Packs
 
 | Pack | Description |
 |------|-------------|
-| `web-dev` | Browser automation, HTML/CSS tools, and HTTP inspection |
-| `rust-dev` | cargo integration, crates.io search, and compiler error explanations |
-| `python-dev` | Package management, virtual environments, and debugging tools |
-| `git-tools` | Branch management, commit message generation, and conflict resolution |
-| `docs-writer` | README generation, API docs, and changelog formatting |
+| [brave-search](src/brave-search/pack.toml) | Web and local search via the Brave Search API through MCP |
+| [docs-writer](src/docs-writer/pack.toml) | System prompt and slash commands for technical writing |
+| [fetch](src/fetch/pack.toml) | HTTP fetch tool via MCP — retrieve web pages as markdown or raw text |
+| [filesystem](src/filesystem/pack.toml) | Read and write local files via the MCP filesystem server |
+| [git-tools](src/git-tools/pack.toml) | Git operations via MCP plus a structured code review slash command |
+| [github](src/github/pack.toml) | GitHub repos, issues, pull requests, and code search via MCP |
+| [memory](src/memory/pack.toml) | Persistent key-value memory store across sessions via MCP knowledge graph |
+| [postgres](src/postgres/pack.toml) | PostgreSQL database query access via MCP |
+| [python-dev](src/python-dev/pack.toml) | System prompt and slash commands for Python development |
+| [rust-dev](src/rust-dev/pack.toml) | System prompt and slash commands for Rust development |
+| [sequential-thinking](src/sequential-thinking/pack.toml) | Structured chain-of-thought reasoning via MCP |
+| [sqlite](src/sqlite/pack.toml) | SQLite database access via MCP |
+| [web-dev](src/web-dev/pack.toml) | Browser automation via Puppeteer MCP plus a web development system prompt |
 
-> **Note:** The v0.1.0 entries above are placeholders. Archive URLs and sha256 hashes will be updated when real pack archives are published.
+## Installing Packs
 
-## Contributing a pack
+```sh
+# Install weave
+cargo install packweave
 
-Open an issue or PR with your pack's metadata. Packs must include a publicly accessible `tar.gz` archive and a valid SHA256 checksum.
+# Install a pack (applies to all installed CLIs automatically)
+weave install filesystem
+
+# Search available packs
+weave search mcp
+
+# List installed packs
+weave list
+
+# See full usage
+weave --help
+```
+
+## Repository Structure
+
+```
+index.json          Lightweight search catalog (name, description, latest version per pack)
+packs/              Per-pack metadata — fetched on demand during install
+  {name}.json       Full metadata: all versions, download URLs, SHA256 checksums
+src/                Pack source files — canonical source of truth, reviewed by maintainers
+  {name}/
+    pack.toml       Pack manifest in canonical [pack] format
+    prompts/        System prompt and CLI-specific instruction files
+    commands/       Slash command definitions (.md files)
+TEMPLATE/           Starter template for contributors
+```
+
+## Registry Protocol
+
+The weave client uses a two-tier sparse index so clients never download more than they need:
+
+1. **`index.json`** — a lightweight catalog fetched once for `weave search` and `weave list`. Contains only pack names, descriptions, and latest versions. Never contains version history or download URLs.
+
+2. **`packs/{name}.json`** — full pack metadata fetched on demand only when installing or updating that specific pack. Contains all versions, download URLs, and SHA256 checksums.
+
+This design keeps `weave install` fast regardless of how many packs the registry contains.
+
+See [`docs/REGISTRY.md`](https://github.com/PackWeave/weave/blob/main/docs/REGISTRY.md) in the weave repo for the full protocol specification and JSON schemas.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).

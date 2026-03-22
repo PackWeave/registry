@@ -2,196 +2,105 @@
   "filesystem": {
     "name": "filesystem",
     "description": "Read and write local files via the MCP filesystem server",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/filesystem-0.1.0.tar.gz",
-        "sha256": "3705a6f5264f0bb99f66673dcfcaee0c1f35b8e8e597ff350d8301476a9ff818",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "github": {
     "name": "github",
     "description": "GitHub repos, issues, pull requests, and code search via MCP",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/github-0.1.0.tar.gz",
-        "sha256": "d760bd8b45e62cd6ba6f8943adcd23995285e339eebef558fa1184ce8d30dee3",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "postgres": {
     "name": "postgres",
-    "description": "PostgreSQL database query access via MCP — read-only schema inspection and SQL execution",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/postgres-0.1.0.tar.gz",
-        "sha256": "b07c821d0459e33ca99115f2634967d9010c4bddbe543230ea79729c30e43f42",
-        "size_bytes": null
-      }
-    ]
+    "description": "PostgreSQL database query access via MCP \u2014 read-only schema inspection and SQL execution",
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "brave-search": {
     "name": "brave-search",
     "description": "Web and local search via the Brave Search API through MCP",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/brave-search-0.1.0.tar.gz",
-        "sha256": "dfbab71e617db6dbd0327a125945cf18c3925b0a154fdf182b9068298f77ead5",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "memory": {
     "name": "memory",
     "description": "Persistent key-value memory store across sessions via MCP knowledge graph",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/memory-0.1.0.tar.gz",
-        "sha256": "13474d894088f584ddf738f363511fdee52a3364c96518b04002f1853a278005",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "fetch": {
     "name": "fetch",
-    "description": "HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/fetch-0.1.0.tar.gz",
-        "sha256": "7136be2433e256a7fd443b4388df0cf0f48c33210104294e4ee9bfec4a0165c2",
-        "size_bytes": null
-      }
-    ]
+    "description": "HTTP fetch tool via MCP \u2014 retrieve web pages and API responses as markdown or raw text",
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "sqlite": {
     "name": "sqlite",
-    "description": "SQLite database access via MCP — read, write, and analyze local SQLite databases",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/sqlite-0.1.0.tar.gz",
-        "sha256": "382fa9cb63bf5e8b87d4c51ad00240c32a7cf6349aefc1b3e670616d1fbfb92d",
-        "size_bytes": null
-      }
-    ]
+    "description": "SQLite database access via MCP \u2014 read, write, and analyze local SQLite databases",
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "git-tools": {
     "name": "git-tools",
     "description": "Git operations via MCP plus a structured code review slash command",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/git-tools-0.1.0.tar.gz",
-        "sha256": "2268e15607bccd4331d63228940d8bd0987a9d3feffc803d83100fc0a66ef7e1",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "docs-writer": {
     "name": "docs-writer",
     "description": "System prompt and slash commands for technical writing: READMEs, API docs, and changelogs",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/docs-writer-0.1.0.tar.gz",
-        "sha256": "edbba26913b0ea28f8db13d99ed5b05b9b442ce6857275fe895c7f952335599b",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "rust-dev": {
     "name": "rust-dev",
     "description": "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/rust-dev-0.1.0.tar.gz",
-        "sha256": "5824495f298c924562ab6123cd309db3e73af3e760d1c359960e88ff95a70a63",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "python-dev": {
     "name": "python-dev",
     "description": "System prompt and slash commands for Python development: best practices, typing, and tooling",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/python-dev-0.1.0.tar.gz",
-        "sha256": "363fa0f3edfea7c8d0666fd0f2a0b52e2aefcba94d70c80d2ba67305fa867b2a",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "web-dev": {
     "name": "web-dev",
     "description": "Browser automation via Puppeteer MCP plus a web development system prompt",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/web-dev-0.1.0.tar.gz",
-        "sha256": "0b35b47438f5ba6c629b764fe348c1df3fe5be78638ca0a820bc93584a73e1f4",
-        "size_bytes": null
-      }
-    ]
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   },
   "sequential-thinking": {
     "name": "sequential-thinking",
-    "description": "Structured chain-of-thought reasoning via MCP — break down complex problems step by step",
-    "authors": ["PackWeave"],
-    "license": "MIT",
-    "repository": "https://github.com/PackWeave/registry",
-    "versions": [
-      {
-        "version": "0.1.0",
-        "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/sequential-thinking-0.1.0.tar.gz",
-        "sha256": "458394c86ae5baf5f4c7dc8b3c3100ca5cff6bf50fc6645876a27efac847f267",
-        "size_bytes": null
-      }
-    ]
+    "description": "Structured chain-of-thought reasoning via MCP \u2014 break down complex problems step by step",
+    "authors": [
+      "PackWeave"
+    ],
+    "latest_version": "0.1.0"
   }
 }

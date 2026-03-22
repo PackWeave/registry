@@ -1,0 +1,24 @@
+{
+  "name": "brave-search",
+  "description": "Web and local search via the Brave Search API through MCP",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "search",
+    "brave",
+    "web",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/brave-search-0.1.0.tar.gz",
+      "sha256": "bd77359807a26d541d08cbf11f98a4f4541e8d9323d1479b5360e8f50ac439dc",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

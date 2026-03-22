@@ -1,0 +1,25 @@
+{
+  "name": "postgres",
+  "description": "PostgreSQL database query access via MCP \u2014 read-only schema inspection and SQL execution",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "postgres",
+    "postgresql",
+    "database",
+    "sql",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/postgres-0.1.0.tar.gz",
+      "sha256": "e2155773584ad8b513fb98c2b1ee54e83a65845122a0640ba7059d3d9508bb04",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

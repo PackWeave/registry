@@ -1,0 +1,15 @@
+[pack]
+name = "fetch"
+version = "0.1.0"
+description = "HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text"
+authors = ["PackWeave"]
+license = "MIT"
+repository = "https://github.com/PackWeave/registry"
+keywords = ["fetch", "http", "web", "api", "mcp"]
+
+[[servers]]
+name = "fetch"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-fetch@latest"]
+transport = "stdio"
+tools = ["fetch"]

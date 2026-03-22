@@ -1,0 +1,24 @@
+{
+  "name": "rust-dev",
+  "description": "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "rust",
+    "cargo",
+    "clippy",
+    "development"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/rust-dev-0.1.0.tar.gz",
+      "sha256": "00d2626c705cf561f9bb1b54b06bfe3509c89482007a9babce5a386fc4dff0bb",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}

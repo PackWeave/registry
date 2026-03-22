@@ -1,0 +1,24 @@
+{
+  "name": "memory",
+  "description": "Persistent key-value memory store across sessions via MCP knowledge graph",
+  "authors": [
+    "PackWeave"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/PackWeave/registry",
+  "keywords": [
+    "memory",
+    "knowledge-graph",
+    "persistence",
+    "mcp"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/memory-0.1.0.tar.gz",
+      "sha256": "4c50ad10f25b4520f6660a338c4e82fcebe8be629ee50e1c7c18c26401e8dde4",
+      "size_bytes": null,
+      "dependencies": {}
+    }
+  ]
+}
