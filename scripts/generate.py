@@ -103,6 +103,21 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
     if pack_json_path.exists():
         with open(pack_json_path, encoding="utf-8") as f:
             existing = json.load(f)
+
+        # Version immutability: refuse to change the content of an already-published
+        # version. A different files map means the pack author forgot to bump the
+        # version in pack.toml.
+        existing_by_version = {v["version"]: v for v in existing.get("versions", [])}
+        if version in existing_by_version:
+            old_files = existing_by_version[version].get("files", {})
+            if old_files != files_map:
+                print(
+                    f"Error: {pack_name} version {version} is already published with "
+                    f"different content. Bump the version in pack.toml.",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+
         # Replace or insert the version entry for the current version
         versions = [v for v in existing.get("versions", []) if v["version"] != version]
         versions.append(new_release)
