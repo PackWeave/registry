@@ -1,105 +1,149 @@
 {
-  "filesystem": {
-    "name": "filesystem",
-    "description": "Read and write local files via the MCP filesystem server",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "github": {
-    "name": "github",
-    "description": "GitHub repos, issues, pull requests, and code search via MCP",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "postgres": {
-    "name": "postgres",
-    "description": "PostgreSQL database query access via MCP \u2014 read-only schema inspection and SQL execution",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
   "brave-search": {
     "name": "brave-search",
     "description": "Web and local search via the Brave Search API through MCP",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "memory": {
-    "name": "memory",
-    "description": "Persistent key-value memory store across sessions via MCP knowledge graph",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "fetch": {
-    "name": "fetch",
-    "description": "HTTP fetch tool via MCP \u2014 retrieve web pages and API responses as markdown or raw text",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "sqlite": {
-    "name": "sqlite",
-    "description": "SQLite database access via MCP \u2014 read, write, and analyze local SQLite databases",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "git-tools": {
-    "name": "git-tools",
-    "description": "Git operations via MCP plus a structured code review slash command",
-    "authors": [
-      "PackWeave"
+    "keywords": [
+      "search",
+      "brave",
+      "web",
+      "mcp"
     ],
     "latest_version": "0.1.0"
   },
   "docs-writer": {
     "name": "docs-writer",
     "description": "System prompt and slash commands for technical writing: READMEs, API docs, and changelogs",
-    "authors": [
-      "PackWeave"
+    "keywords": [
+      "documentation",
+      "writing",
+      "readme",
+      "technical-writing"
     ],
     "latest_version": "0.1.0"
   },
-  "rust-dev": {
-    "name": "rust-dev",
-    "description": "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns",
-    "authors": [
-      "PackWeave"
+  "fetch": {
+    "name": "fetch",
+    "description": "HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text",
+    "keywords": [
+      "fetch",
+      "http",
+      "web",
+      "api",
+      "mcp"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "filesystem": {
+    "name": "filesystem",
+    "description": "Read and write local files via the MCP filesystem server",
+    "keywords": [
+      "filesystem",
+      "files",
+      "mcp",
+      "read",
+      "write"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "git-tools": {
+    "name": "git-tools",
+    "description": "Git operations via MCP plus a structured code review slash command",
+    "keywords": [
+      "git",
+      "version-control",
+      "code-review",
+      "mcp"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "github": {
+    "name": "github",
+    "description": "GitHub repos, issues, pull requests, and code search via MCP",
+    "keywords": [
+      "github",
+      "git",
+      "issues",
+      "pull-requests",
+      "mcp"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "memory": {
+    "name": "memory",
+    "description": "Persistent key-value memory store across sessions via MCP knowledge graph",
+    "keywords": [
+      "memory",
+      "knowledge-graph",
+      "persistence",
+      "mcp"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "postgres": {
+    "name": "postgres",
+    "description": "PostgreSQL database query access via MCP — read-only schema inspection and SQL execution",
+    "keywords": [
+      "postgres",
+      "postgresql",
+      "database",
+      "sql",
+      "mcp"
     ],
     "latest_version": "0.1.0"
   },
   "python-dev": {
     "name": "python-dev",
     "description": "System prompt and slash commands for Python development: best practices, typing, and tooling",
-    "authors": [
-      "PackWeave"
+    "keywords": [
+      "python",
+      "development",
+      "typing",
+      "best-practices"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "rust-dev": {
+    "name": "rust-dev",
+    "description": "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns",
+    "keywords": [
+      "rust",
+      "cargo",
+      "clippy",
+      "development"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "sequential-thinking": {
+    "name": "sequential-thinking",
+    "description": "Structured chain-of-thought reasoning via MCP — break down complex problems step by step",
+    "keywords": [
+      "reasoning",
+      "chain-of-thought",
+      "thinking",
+      "mcp"
+    ],
+    "latest_version": "0.1.0"
+  },
+  "sqlite": {
+    "name": "sqlite",
+    "description": "SQLite database access via MCP — read, write, and analyze local SQLite databases",
+    "keywords": [
+      "sqlite",
+      "database",
+      "sql",
+      "mcp"
     ],
     "latest_version": "0.1.0"
   },
   "web-dev": {
     "name": "web-dev",
     "description": "Browser automation via Puppeteer MCP plus a web development system prompt",
-    "authors": [
-      "PackWeave"
-    ],
-    "latest_version": "0.1.0"
-  },
-  "sequential-thinking": {
-    "name": "sequential-thinking",
-    "description": "Structured chain-of-thought reasoning via MCP \u2014 break down complex problems step by step",
-    "authors": [
-      "PackWeave"
+    "keywords": [
+      "web",
+      "browser",
+      "puppeteer",
+      "automation",
+      "mcp"
     ],
     "latest_version": "0.1.0"
   }

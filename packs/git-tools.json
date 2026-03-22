@@ -15,9 +15,10 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/git-tools-0.1.0.tar.gz",
-      "sha256": "86880d59b18d00ba8051091c07768dd9d2648e02fdb37dda2833ad38e18a365c",
-      "size_bytes": null,
+      "files": {
+        "commands/review.md": "Review the staged changes (or the diff provided) and produce a structured code review.\n\nUse `git_diff_staged` to retrieve the staged diff, then analyse it across these dimensions:\n\n## 1. Correctness\n- Are there logic errors, off-by-one issues, or incorrect assumptions?\n- Does the code handle edge cases and error paths?\n- Are there potential panics, null-pointer issues, or unhandled exceptions?\n\n## 2. Design & Architecture\n- Is the change cohesive and focused on a single concern?\n- Does it respect existing abstractions and module boundaries?\n- Are new abstractions justified, or could simpler code achieve the same goal?\n\n## 3. Security\n- Are user-controlled inputs validated or sanitised?\n- Are secrets, credentials, or PII handled safely?\n- Could this change introduce injection vulnerabilities or privilege escalation?\n\n## 4. Performance\n- Are there obvious algorithmic inefficiencies (e.g. O(n²) where O(n) is possible)?\n- Are expensive operations (I/O, network calls) performed unnecessarily in hot paths?\n\n## 5. Test coverage\n- Are new behaviours covered by tests?\n- Are edge cases and failure modes tested?\n- If no tests were added, is that justified?\n\n## 6. Code style & readability\n- Is the code consistent with the surrounding style?\n- Are names clear and self-documenting?\n- Is documentation (comments, docstrings) accurate and sufficient?\n\nFormat your review as:\n- **Summary** — one paragraph overall assessment\n- **Must fix** — numbered list of blocking issues (if any)\n- **Suggestions** — numbered list of non-blocking improvements\n- **Nits** — minor style/readability notes\n",
+        "pack.toml": "[pack]\nname = \"git-tools\"\nversion = \"0.1.0\"\ndescription = \"Git operations via MCP plus a structured code review slash command\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"git\", \"version-control\", \"code-review\", \"mcp\"]\n\n[[servers]]\nname = \"git\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-git@latest\"]\ntransport = \"stdio\"\ntools = [\"git_status\", \"git_diff_unstaged\", \"git_diff_staged\", \"git_commit\", \"git_add\", \"git_reset\", \"git_log\", \"git_create_branch\", \"git_checkout\", \"git_show\", \"git_diff\"]\n"
+      },
       "dependencies": {}
     }
   ]

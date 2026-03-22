@@ -15,9 +15,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/memory-0.1.0.tar.gz",
-      "sha256": "4c50ad10f25b4520f6660a338c4e82fcebe8be629ee50e1c7c18c26401e8dde4",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"memory\"\nversion = \"0.1.0\"\ndescription = \"Persistent key-value memory store across sessions via MCP knowledge graph\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"memory\", \"knowledge-graph\", \"persistence\", \"mcp\"]\n\n[[servers]]\nname = \"memory\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-memory@latest\"]\ntransport = \"stdio\"\ntools = [\"create_entities\", \"create_relations\", \"add_observations\", \"delete_entities\", \"delete_observations\", \"delete_relations\", \"read_graph\", \"search_nodes\", \"open_nodes\"]\n"
+      },
       "dependencies": {}
     }
   ]

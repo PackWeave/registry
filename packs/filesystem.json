@@ -16,9 +16,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/filesystem-0.1.0.tar.gz",
-      "sha256": "9477b9d29b1fdc92f0a7e4bdabc5d6fd4498cd9a8b5ca846ede9865e8fd3d263",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"filesystem\"\nversion = \"0.1.0\"\ndescription = \"Read and write local files via the MCP filesystem server\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"filesystem\", \"files\", \"mcp\", \"read\", \"write\"]\n\n[[servers]]\nname = \"filesystem\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-filesystem@latest\", \".\"]\ntransport = \"stdio\"\ntools = [\"read_file\", \"write_file\", \"list_directory\", \"create_directory\", \"move_file\", \"search_files\", \"get_file_info\"]\n"
+      },
       "dependencies": {}
     }
   ]

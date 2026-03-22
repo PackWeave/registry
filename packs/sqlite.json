@@ -1,6 +1,6 @@
 {
   "name": "sqlite",
-  "description": "SQLite database access via MCP \u2014 read, write, and analyze local SQLite databases",
+  "description": "SQLite database access via MCP — read, write, and analyze local SQLite databases",
   "authors": [
     "PackWeave"
   ],
@@ -15,9 +15,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/sqlite-0.1.0.tar.gz",
-      "sha256": "28af868121091c97113786a80d510f25c7d9b2da9784728163fe9fe99a3574fe",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"sqlite\"\nversion = \"0.1.0\"\ndescription = \"SQLite database access via MCP — read, write, and analyze local SQLite databases\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"sqlite\", \"database\", \"sql\", \"mcp\"]\n\n[[servers]]\nname = \"sqlite\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-sqlite@latest\"]\ntransport = \"stdio\"\ntools = [\"read_query\", \"write_query\", \"create_table\", \"list_tables\", \"describe_table\", \"append_insight\"]\n"
+      },
       "dependencies": {}
     }
   ]

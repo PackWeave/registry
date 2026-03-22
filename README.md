@@ -44,22 +44,34 @@ weave --help
 ```
 index.json          Lightweight search catalog (name, description, latest version per pack)
 packs/              Per-pack metadata — fetched on demand during install
-  {name}.json       Full metadata: all versions, download URLs, SHA256 checksums
-src/                Pack source files — canonical source of truth, reviewed by maintainers
+  {name}.json       Full metadata: all versions with inline file content
+src/                Pack source files — the only files contributors need to touch
   {name}/
     pack.toml       Pack manifest in canonical [pack] format
     prompts/        System prompt and CLI-specific instruction files
     commands/       Slash command definitions (.md files)
+    skills/         Skill files for Codex CLI (.md files)
+    settings/       CLI-specific settings fragments (.json / .toml)
+scripts/
+  generate.py       Regenerates packs/*.json and index.json from src/
 TEMPLATE/           Starter template for contributors
 ```
+
+A GitHub Actions workflow automatically regenerates `packs/{name}.json` and `index.json`
+from `src/` on every merge to main. **Contributors only ever touch files under `src/`.**
 
 ## Registry Protocol
 
 The weave client uses a two-tier sparse index so clients never download more than they need:
 
-1. **`index.json`** — a lightweight catalog fetched once for `weave search` and `weave list`. Contains only pack names, descriptions, and latest versions. Never contains version history or download URLs.
+1. **`index.json`** — a lightweight catalog fetched once for `weave search` and `weave list`.
+   Contains only pack names, descriptions, and latest versions. Never contains version history
+   or file content.
 
-2. **`packs/{name}.json`** — full pack metadata fetched on demand only when installing or updating that specific pack. Contains all versions, download URLs, and SHA256 checksums.
+2. **`packs/{name}.json`** — full pack metadata fetched on demand only when installing or
+   updating that specific pack. Contains all versions with their complete file content embedded
+   inline as a flat map of relative path → file content. No tarballs, no release artifacts,
+   no SHA256 ceremony.
 
 This design keeps `weave install` fast regardless of how many packs the registry contains.
 

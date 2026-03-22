@@ -13,8 +13,11 @@ A pack is a versioned bundle that can include:
 
 1. Copy `TEMPLATE/` to `src/your-pack-name/`
 2. Fill in `pack.toml` with your pack's metadata and configuration
-3. Add any prompt files under `prompts/` and command files under `commands/`
-4. Open a PR — a maintainer will review, build the tarball, and publish it
+3. Add any prompt files under `prompts/`, command files under `commands/`, and settings fragments under `settings/`
+4. Open a PR — a maintainer reviews and merges; CI auto-publishes the pack
+
+You never need to touch `packs/` or `index.json` directly. A GitHub Actions workflow
+regenerates those files automatically on every merge to main.
 
 ## Pack Manifest Format
 
@@ -76,10 +79,23 @@ codex_cli = false
 src/your-pack-name/
   pack.toml               # Required — the manifest
   prompts/
-    claude.md             # Optional — Claude Code / Gemini CLI system prompt addition
+    system.md             # Optional — used as fallback for all CLIs
+    claude.md             # Optional — Claude Code / Gemini CLI-specific prompt addition
+    gemini.md             # Optional — Gemini CLI-specific prompt addition
+    codex.md              # Optional — Codex CLI-specific prompt addition
   commands/
-    command-name.md       # Optional — slash command (one file per command)
+    command-name.md       # Optional — Claude Code slash command (one file per command)
+  skills/
+    skill-name.md         # Optional — Codex CLI skill (one file per skill)
+  settings/
+    claude.json           # Optional — merged into ~/.claude/settings.json
+    gemini.json           # Optional — merged into ~/.gemini/settings.json
+    codex.toml            # Optional — merged into ~/.codex/config.toml
 ```
+
+All content is plain text (TOML, JSON, Markdown) — no binaries. MCP server code lives on npm,
+PyPI, or GitHub and is fetched at runtime by the CLI; this registry only distributes the
+configuration that points at it.
 
 ## Naming Rules
 
@@ -97,4 +113,19 @@ PRs are accepted when the pack:
 
 ## Pack Versioning
 
-Use [semver](https://semver.org). Bump `version` in `pack.toml` for each change. A maintainer will create new release artifacts and update `packs/{name}.json` with the new version entry.
+Use [semver](https://semver.org). Bump `version` in `pack.toml` for each change.
+CI will pick up the new version automatically on merge and add it to `packs/{name}.json`.
+
+## How Publishing Works
+
+When a PR is merged to main:
+
+1. The `publish` GitHub Actions workflow runs `scripts/generate.py`
+2. The script reads all files from `src/{name}/` and embeds them inline in `packs/{name}.json`
+   as a flat map of relative path → file content
+3. It also updates `index.json` with the latest version for each pack
+4. The workflow commits the generated files back to main
+
+The weave client fetches `packs/{name}.json` on demand during `weave install` and writes the
+embedded files directly to `~/.packweave/packs/{name}/{version}/` — no tarballs, no downloads
+beyond the single JSON fetch.

@@ -1,6 +1,6 @@
 {
   "name": "postgres",
-  "description": "PostgreSQL database query access via MCP \u2014 read-only schema inspection and SQL execution",
+  "description": "PostgreSQL database query access via MCP — read-only schema inspection and SQL execution",
   "authors": [
     "PackWeave"
   ],
@@ -16,9 +16,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/postgres-0.1.0.tar.gz",
-      "sha256": "e2155773584ad8b513fb98c2b1ee54e83a65845122a0640ba7059d3d9508bb04",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"postgres\"\nversion = \"0.1.0\"\ndescription = \"PostgreSQL database query access via MCP — read-only schema inspection and SQL execution\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"postgres\", \"postgresql\", \"database\", \"sql\", \"mcp\"]\n\n[[servers]]\nname = \"postgres\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-postgres@latest\"]\ntransport = \"stdio\"\ntools = [\"query\"]\n\n[servers.env.POSTGRES_URL]\nrequired = true\nsecret = true\ndescription = \"PostgreSQL connection string, e.g. postgresql://user:pass@localhost:5432/dbname\"\n"
+      },
       "dependencies": {}
     }
   ]

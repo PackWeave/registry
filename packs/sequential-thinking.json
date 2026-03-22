@@ -1,6 +1,6 @@
 {
   "name": "sequential-thinking",
-  "description": "Structured chain-of-thought reasoning via MCP \u2014 break down complex problems step by step",
+  "description": "Structured chain-of-thought reasoning via MCP — break down complex problems step by step",
   "authors": [
     "PackWeave"
   ],
@@ -15,9 +15,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/sequential-thinking-0.1.0.tar.gz",
-      "sha256": "af5c37229fc7532605cca3f26ab64f52baa3ca0115391c51d236f7bee0a41e36",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"sequential-thinking\"\nversion = \"0.1.0\"\ndescription = \"Structured chain-of-thought reasoning via MCP — break down complex problems step by step\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"reasoning\", \"chain-of-thought\", \"thinking\", \"mcp\"]\n\n[[servers]]\nname = \"sequential-thinking\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-sequential-thinking@latest\"]\ntransport = \"stdio\"\ntools = [\"sequentialthinking\"]\n"
+      },
       "dependencies": {}
     }
   ]

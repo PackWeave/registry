@@ -1,6 +1,6 @@
 {
   "name": "fetch",
-  "description": "HTTP fetch tool via MCP \u2014 retrieve web pages and API responses as markdown or raw text",
+  "description": "HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text",
   "authors": [
     "PackWeave"
   ],
@@ -16,9 +16,9 @@
   "versions": [
     {
       "version": "0.1.0",
-      "url": "https://github.com/PackWeave/registry/releases/download/packs-v0.1.0/fetch-0.1.0.tar.gz",
-      "sha256": "422142713feb40cfd59083982a0f35261faa7d7c567df37b51eb0abbf65169a9",
-      "size_bytes": null,
+      "files": {
+        "pack.toml": "[pack]\nname = \"fetch\"\nversion = \"0.1.0\"\ndescription = \"HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"fetch\", \"http\", \"web\", \"api\", \"mcp\"]\n\n[[servers]]\nname = \"fetch\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-fetch@latest\"]\ntransport = \"stdio\"\ntools = [\"fetch\"]\n"
+      },
       "dependencies": {}
     }
   ]
