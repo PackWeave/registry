@@ -1,25 +1,26 @@
-# Contributing a Pack
+# 🤝 Contributing a Pack
 
 Thank you for contributing to the PackWeave registry. This guide covers everything you need to submit a new pack.
 
-## What is a Pack?
+## 📦 What is a Pack?
 
 A pack is a versioned bundle that can include:
 - **MCP servers** — configured and applied to each CLI's config file
 - **System prompts** — appended to the CLI's global instruction file
 - **Slash commands** — installed into the CLI's command directory
 
-## Quick Start
+## ⚡ Quick Start
 
-1. Copy `TEMPLATE/` to `src/your-pack-name/`
+1. Run `weave init your-pack-name` to scaffold the directory structure, or copy `TEMPLATE/` to `src/your-pack-name/` manually
 2. Fill in `pack.toml` with your pack's metadata and configuration
 3. Add any prompt files under `prompts/`, command files under `commands/`, and settings fragments under `settings/`
-4. Open a PR — a maintainer reviews and merges; CI auto-publishes the pack
+4. Test locally: `weave install ./src/your-pack-name`
+5. Open a PR — a maintainer reviews and merges; CI auto-publishes the pack
 
 You never need to touch `packs/` or `index.json` directly. A GitHub Actions workflow
 regenerates those files automatically on every merge to main.
 
-## Pack Manifest Format
+## 🔧 Pack Manifest Format
 
 `pack.toml` must start with a `[pack]` section header:
 
@@ -34,17 +35,17 @@ repository = "https://github.com/you/your-pack"
 keywords = ["keyword1", "keyword2"]
 ```
 
-### MCP Servers
+### 🔌 MCP Servers
 
 ```toml
 [[servers]]
 name = "server-name"           # Must be unique across all installed packs
 command = "npx"                # Executable (stdio transport)
 args = ["-y", "@org/pkg@latest"]
-transport = "stdio"            # "stdio" or "sse"
+transport = "stdio"            # "stdio" or "http"
 tools = ["tool1", "tool2"]     # Optional: expose only a subset of tools
 
-# For HTTP/SSE transport, use url instead of command/args:
+# For HTTP transport, use url instead of command/args:
 # url = "https://your-server.example.com/mcp"
 # headers = { Authorization = "Bearer ${API_KEY}" }
 
@@ -55,7 +56,7 @@ secret = true
 description = "Your API key — get one at https://example.com"
 ```
 
-### Targeting Specific CLIs
+### 🖥️ Targeting Specific CLIs
 
 By default, a pack targets all supported CLIs. To restrict:
 
@@ -66,14 +67,14 @@ gemini_cli = false
 codex_cli = false
 ```
 
-### CLI-Specific Settings
+### ⚙️ CLI-Specific Settings
 
 ```toml
 [extensions.claude_code]
 # Any valid Claude Code settings JSON — merged non-destructively into ~/.claude/settings.json
 ```
 
-## File Layout
+## 📁 File Layout
 
 ```
 src/your-pack-name/
@@ -97,13 +98,13 @@ All content is plain text (TOML, JSON, Markdown) — no binaries. MCP server cod
 PyPI, or GitHub and is fetched at runtime by the CLI; this registry only distributes the
 configuration that points at it.
 
-## Naming Rules
+## 🏷️ Naming Rules
 
 - Pack names: lowercase letters, digits, hyphens only (e.g. `my-pack`, `brave-search`)
 - Server names: same rules, must be globally unique across all installed packs
 - Command names: same rules
 
-## Review Criteria
+## ✅ Review Criteria
 
 PRs are accepted when the pack:
 - Has a valid `pack.toml` with a `[pack]` header
@@ -111,12 +112,12 @@ PRs are accepted when the pack:
 - Does not conflict with existing pack server names
 - Includes a clear description and appropriate keywords
 
-## Pack Versioning
+## 🔖 Pack Versioning
 
 Use [semver](https://semver.org). Bump `version` in `pack.toml` for each change.
 CI will pick up the new version automatically on merge and add it to `packs/{name}.json`.
 
-## How Publishing Works
+## 🚀 How Publishing Works
 
 When a PR is merged to main:
 

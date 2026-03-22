@@ -2,7 +2,7 @@
 
 The official pack registry for [weave](https://github.com/PackWeave/weave) — a CLI tool that manages MCP server configurations, slash commands, and system prompts across AI CLIs (Claude Code, Gemini CLI, Codex CLI).
 
-## Available Packs
+## 📦 Available Packs
 
 | Pack | Description |
 |------|-------------|
@@ -20,7 +20,7 @@ The official pack registry for [weave](https://github.com/PackWeave/weave) — a
 | [sqlite](src/sqlite/pack.toml) | SQLite database access via MCP |
 | [web-dev](src/web-dev/pack.toml) | Browser automation via Puppeteer MCP plus a web development system prompt |
 
-## Installing Packs
+## ⚡ Installing Packs
 
 ```sh
 # Install weave
@@ -39,7 +39,7 @@ weave list
 weave --help
 ```
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 ```
 index.json          Lightweight search catalog (name, description, latest version per pack)
@@ -60,7 +60,7 @@ TEMPLATE/           Starter template for contributors
 A GitHub Actions workflow automatically regenerates `packs/{name}.json` and `index.json`
 from `src/` on every merge to main. **Contributors only ever touch files under `src/`.**
 
-## Registry Protocol
+## ⚙️ Registry Protocol
 
 The weave client uses a two-tier sparse index so clients never download more than they need:
 
@@ -77,6 +77,6 @@ This design keeps `weave install` fast regardless of how many packs the registry
 
 See [`docs/REGISTRY.md`](https://github.com/PackWeave/weave/blob/main/docs/REGISTRY.md) in the weave repo for the full protocol specification and JSON schemas.
 
-## Contributing
+## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
