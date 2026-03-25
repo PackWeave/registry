@@ -15,6 +15,7 @@ set to the highest semver version present in each packs/{name}.json.
 """
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -198,6 +199,19 @@ def build_files_map(pack_src_dir: Path) -> dict[str, str]:
     return files
 
 
+def compute_checksum(files_map: dict[str, str]) -> str:
+    """Compute a sha256-prefixed checksum over a files map.
+
+    Uses the same canonical form as Weave's checksum::compute():
+    compact sorted JSON with raw UTF-8 (no ASCII escaping).
+    """
+    canonical = json.dumps(
+        files_map, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    )
+    digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return f"sha256:{digest}"
+
+
 def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
     """Regenerate packs/{name}.json for one pack. Returns the index entry."""
     pack_src = src_dir / pack_name
@@ -227,6 +241,7 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         "version": version,
         "files": files_map,
         "dependencies": {},
+        "checksum": compute_checksum(files_map),
     }
 
     pack_json_path = packs_dir / f"{pack_name}.json"
