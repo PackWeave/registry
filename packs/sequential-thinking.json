@@ -19,7 +19,8 @@
       "files": {
         "pack.toml": "[pack]\nname = \"sequential-thinking\"\nversion = \"0.1.0\"\ndescription = \"Structured chain-of-thought reasoning via MCP — break down complex problems step by step\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"reasoning\", \"chain-of-thought\", \"thinking\", \"mcp\"]\n\n[[servers]]\nname = \"sequential-thinking\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-sequential-thinking@latest\"]\ntransport = \"stdio\"\ntools = [\"sequentialthinking\"]\n"
       },
-      "dependencies": {}
+      "dependencies": {},
+      "checksum": "sha256:c1da7192c923c801df32afde883028d309c8de41ea735ce275f79eed56b5ffe4"
     }
   ]
 }
