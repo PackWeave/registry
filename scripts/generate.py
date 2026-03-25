@@ -46,7 +46,7 @@ def parse_pack_toml(pack_toml_path: Path) -> dict:
     """Parse a pack.toml file and extract metadata from the [pack] section."""
     data = parse_pack_toml_full(pack_toml_path)
     pack = data["pack"]
-    return {
+    meta = {
         "name": pack.get("name"),
         "version": pack.get("version"),
         "description": pack.get("description"),
@@ -55,6 +55,11 @@ def parse_pack_toml(pack_toml_path: Path) -> dict:
         "repository": pack.get("repository"),
         "keywords": pack.get("keywords", []),
     }
+    if pack.get("deprecated"):
+        meta["deprecated"] = True
+        if pack.get("deprecated_message"):
+            meta["deprecated_message"] = pack["deprecated_message"]
+    return meta
 
 
 def validate_pack(pack_toml_path: Path, pack_dir_name: str) -> list[str]:
@@ -264,20 +269,32 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         "keywords": meta["keywords"],
         "versions": versions,
     }
+    if meta.get("deprecated"):
+        pack_metadata["deprecated"] = True
+        if meta.get("deprecated_message"):
+            pack_metadata["deprecated_message"] = meta["deprecated_message"]
 
     with open(pack_json_path, "w", encoding="utf-8") as f:
         json.dump(pack_metadata, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
     latest = max(versions, key=lambda v: semver_key(v["version"]))["version"]
-    print(f"  {pack_name} -> {version} (latest: {latest})")
 
-    return {
+    if meta.get("deprecated"):
+        msg = meta.get("deprecated_message", "")
+        print(f"  {pack_name} -> {version} (latest: {latest}) [DEPRECATED{': ' + msg if msg else ''}]")
+    else:
+        print(f"  {pack_name} -> {version} (latest: {latest})")
+
+    index_entry = {
         "name": pack_metadata["name"],
         "description": pack_metadata["description"],
         "keywords": pack_metadata["keywords"],
         "latest_version": latest,
     }
+    if meta.get("deprecated"):
+        index_entry["deprecated"] = True
+    return index_entry
 
 
 def regenerate_index(packs_dir: Path) -> dict:
@@ -294,12 +311,15 @@ def regenerate_index(packs_dir: Path) -> dict:
         if not versions:
             continue
         latest = max(versions, key=lambda v: semver_key(v["version"]))["version"]
-        packs[name] = {
+        entry = {
             "name": meta.get("name", name),
             "description": meta.get("description", ""),
             "keywords": meta.get("keywords", []),
             "latest_version": latest,
         }
+        if meta.get("deprecated"):
+            entry["deprecated"] = True
+        packs[name] = entry
     return {
         "schema_version": REGISTRY_SCHEMA_VERSION,
         "packs": packs,
@@ -357,6 +377,13 @@ def main() -> None:
     print(f"Processing {len(pack_names)} pack(s):")
     for name in pack_names:
         process_pack(src_dir, packs_dir, name)
+
+    # Remove orphaned pack JSONs (packs deleted from src/)
+    pack_name_set = set(pack_names)
+    for orphan in sorted(packs_dir.glob("*.json")):
+        if orphan.stem not in pack_name_set:
+            orphan.unlink()
+            print(f"  Removed orphaned {orphan.name} (no matching src/ directory)")
 
     print("\nRegenerating index.json ...")
     index = regenerate_index(packs_dir)

@@ -134,3 +134,28 @@ When a PR is merged to main:
 
 > [!NOTE]
 > You never need to trigger publishing manually. Merging your PR is all it takes — CI handles the rest.
+
+## Deprecating or Removing a Pack
+
+### Deprecation
+
+To mark a pack as deprecated, add the following fields to the `[pack]` section of its `pack.toml`:
+
+```toml
+[pack]
+# ... existing fields ...
+deprecated = true
+deprecated_message = "Use the new-pack pack instead"  # optional
+```
+
+On merge, CI propagates the `deprecated` flag to `packs/{name}.json` and `index.json`. The pack remains installable but `weave search` and `weave list` will mark it as deprecated.
+
+### Removal
+
+To remove a pack entirely:
+
+1. Delete the `src/{name}/` directory
+2. Open a PR — on merge, CI deletes the orphaned `packs/{name}.json` and regenerates `index.json` without the pack
+
+> [!WARNING]
+> Removal is permanent. Prefer deprecation unless the pack has a security issue or policy violation.
