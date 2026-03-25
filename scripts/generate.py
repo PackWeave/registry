@@ -14,6 +14,7 @@ Then regenerates index.json as a flat catalog of all packs with latest_version
 set to the highest semver version present in each packs/{name}.json.
 """
 
+import hashlib
 import json
 import re
 import sys
@@ -69,6 +70,17 @@ def semver_key(version_str: str) -> tuple[int, ...]:
         return (0, 0, 0)
 
 
+def compute_checksum(files: dict[str, str]) -> str:
+    """Compute a sha256: prefixed checksum over the canonical JSON of a files map.
+
+    The canonical form is compact JSON with sorted keys — matching the Rust
+    client's checksum::compute() function exactly.
+    """
+    canonical = json.dumps(files, sort_keys=True, separators=(",", ":"))
+    digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return f"sha256:{digest}"
+
+
 def build_files_map(pack_src_dir: Path) -> dict[str, str]:
     """Walk src/{name}/ and return a flat map of relative-path -> file content."""
     files: dict[str, str] = {}
@@ -109,6 +121,7 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         "version": version,
         "files": files_map,
         "dependencies": {},
+        "checksum": compute_checksum(files_map),
     }
 
     pack_json_path = packs_dir / f"{pack_name}.json"

@@ -19,7 +19,8 @@
       "files": {
         "pack.toml": "[pack]\nname = \"memory\"\nversion = \"0.1.0\"\ndescription = \"Persistent key-value memory store across sessions via MCP knowledge graph\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"memory\", \"knowledge-graph\", \"persistence\", \"mcp\"]\n\n[[servers]]\nname = \"memory\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-memory@latest\"]\ntransport = \"stdio\"\ntools = [\"create_entities\", \"create_relations\", \"add_observations\", \"delete_entities\", \"delete_observations\", \"delete_relations\", \"read_graph\", \"search_nodes\", \"open_nodes\"]\n"
       },
-      "dependencies": {}
+      "dependencies": {},
+      "checksum": "sha256:7bf489e44de1ca60bac9fc51fbf5764a209391e8ea7259966ed1fc3eee7150ab"
     }
   ]
 }

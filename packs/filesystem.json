@@ -20,7 +20,8 @@
       "files": {
         "pack.toml": "[pack]\nname = \"filesystem\"\nversion = \"0.1.0\"\ndescription = \"Read and write local files via the MCP filesystem server\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"filesystem\", \"files\", \"mcp\", \"read\", \"write\"]\n\n[[servers]]\nname = \"filesystem\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-filesystem@latest\", \".\"]\ntransport = \"stdio\"\ntools = [\"read_file\", \"write_file\", \"list_directory\", \"create_directory\", \"move_file\", \"search_files\", \"get_file_info\"]\n"
       },
-      "dependencies": {}
+      "dependencies": {},
+      "checksum": "sha256:167c89ccd2355ce79fb9d8fc1df447c07368d97ebc093364456c3367c681b153"
     }
   ]
 }
