@@ -21,7 +21,7 @@
         "pack.toml": "[pack]\nname = \"postgres\"\nversion = \"0.1.0\"\ndescription = \"PostgreSQL database query access via MCP — read-only schema inspection and SQL execution\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"postgres\", \"postgresql\", \"database\", \"sql\", \"mcp\"]\n\n[[servers]]\nname = \"postgres\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-postgres@latest\"]\ntransport = \"stdio\"\ntools = [\"query\"]\n\n[servers.env.POSTGRES_URL]\nrequired = true\nsecret = true\ndescription = \"PostgreSQL connection string, e.g. postgresql://user:pass@localhost:5432/dbname\"\n"
       },
       "dependencies": {},
-      "checksum": "sha256:21fe8d2b695b39ddd1bfbea11af8067afda2d069f041c1a4a9bcfa306766046c"
+      "checksum": "sha256:25efde62561f4a00a8ff14a28421003131a6fba8e47d86a8779786b6bf482840"
     }
   ]
 }

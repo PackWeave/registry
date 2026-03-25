@@ -21,7 +21,7 @@
         "pack.toml": "[pack]\nname = \"git-tools\"\nversion = \"0.1.0\"\ndescription = \"Git operations via MCP plus a structured code review slash command\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"git\", \"version-control\", \"code-review\", \"mcp\"]\n\n[[servers]]\nname = \"git\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-git@latest\"]\ntransport = \"stdio\"\ntools = [\"git_status\", \"git_diff_unstaged\", \"git_diff_staged\", \"git_commit\", \"git_add\", \"git_reset\", \"git_log\", \"git_create_branch\", \"git_checkout\", \"git_show\", \"git_diff\"]\n"
       },
       "dependencies": {},
-      "checksum": "sha256:e43a5227785e95058bb21f2c3983ee2b2e7c9056005ef41a0ca59a5d041de120"
+      "checksum": "sha256:460d44e433485519de1bf261e87d309c3f1b3328f33c60ff8c7390c34d70d535"
     }
   ]
 }

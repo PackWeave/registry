@@ -20,7 +20,7 @@
         "pack.toml": "[pack]\nname = \"sqlite\"\nversion = \"0.1.0\"\ndescription = \"SQLite database access via MCP — read, write, and analyze local SQLite databases\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"sqlite\", \"database\", \"sql\", \"mcp\"]\n\n[[servers]]\nname = \"sqlite\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-sqlite@latest\"]\ntransport = \"stdio\"\ntools = [\"read_query\", \"write_query\", \"create_table\", \"list_tables\", \"describe_table\", \"append_insight\"]\n"
       },
       "dependencies": {},
-      "checksum": "sha256:e110041c95e6909c5650bffecff64919a84460df521456670f9aa7c422cb1263"
+      "checksum": "sha256:31bd89057f5609b4add4d468c32a6fdacf93fd2ad058476cce742ea462527160"
     }
   ]
 }

@@ -20,7 +20,7 @@
         "pack.toml": "[pack]\nname = \"brave-search\"\nversion = \"0.1.0\"\ndescription = \"Web and local search via the Brave Search API through MCP\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"search\", \"brave\", \"web\", \"mcp\"]\n\n[[servers]]\nname = \"brave-search\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-brave-search@latest\"]\ntransport = \"stdio\"\ntools = [\"brave_web_search\", \"brave_local_search\"]\n\n[servers.env.BRAVE_API_KEY]\nrequired = true\nsecret = true\ndescription = \"Brave Search API key — get one at https://brave.com/search/api/\"\n"
       },
       "dependencies": {},
-      "checksum": "sha256:233a4c209f0fec43bb5c618a0ab25bd063a407132e948b2f66962a803d24133a"
+      "checksum": "sha256:23a0d9e5afb98adc58f0a33d44086ceb5fc89e5580e14946e8c64f47755c61bf"
     }
   ]
 }

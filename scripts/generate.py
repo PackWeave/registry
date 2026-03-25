@@ -73,10 +73,12 @@ def semver_key(version_str: str) -> tuple[int, ...]:
 def compute_checksum(files: dict[str, str]) -> str:
     """Compute a sha256: prefixed checksum over the canonical JSON of a files map.
 
-    The canonical form is compact JSON with sorted keys — matching the Rust
-    client's checksum::compute() function exactly.
+    The canonical form is compact JSON with sorted keys and raw UTF-8 (no
+    ASCII escaping) — matching the Rust client's checksum::compute() function
+    exactly.  Both sides must use ensure_ascii=False / serde_json raw UTF-8
+    so that non-ASCII file content produces identical byte sequences.
     """
-    canonical = json.dumps(files, sort_keys=True, separators=(",", ":"))
+    canonical = json.dumps(files, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
     return f"sha256:{digest}"
 

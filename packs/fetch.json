@@ -21,7 +21,7 @@
         "pack.toml": "[pack]\nname = \"fetch\"\nversion = \"0.1.0\"\ndescription = \"HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text\"\nauthors = [\"PackWeave\"]\nlicense = \"MIT\"\nrepository = \"https://github.com/PackWeave/registry\"\nkeywords = [\"fetch\", \"http\", \"web\", \"api\", \"mcp\"]\n\n[[servers]]\nname = \"fetch\"\ncommand = \"npx\"\nargs = [\"-y\", \"@modelcontextprotocol/server-fetch@latest\"]\ntransport = \"stdio\"\ntools = [\"fetch\"]\n"
       },
       "dependencies": {},
-      "checksum": "sha256:7b3a9703a2c11bc08c149ae7442462f65e4aea73c0a0d200476ef45d94dab11c"
+      "checksum": "sha256:aa4dfb9817c554cf65bb384b88a2c4fcd851b847ea59882f5304cd0578cfb954"
     }
   ]
 }
