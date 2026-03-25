@@ -16,8 +16,8 @@ set to the highest semver version present in each packs/{name}.json.
 
 import hashlib
 import json
-import re
 import sys
+import tomllib
 from pathlib import Path
 
 # Schema version for all generated registry files (index.json, packs/*.json).
@@ -27,38 +27,23 @@ from pathlib import Path
 REGISTRY_SCHEMA_VERSION = 1
 
 
-def parse_pack_toml(text: str) -> dict:
-    """Extract scalar fields from the [pack] section of a pack.toml.
+def parse_pack_toml(pack_toml_path: Path) -> dict:
+    """Parse a pack.toml file and extract metadata from the [pack] section."""
+    with open(pack_toml_path, "rb") as f:
+        data = tomllib.load(f)
 
-    Uses simple regex — a full TOML parser is not needed here because pack.toml
-    fields are always plain strings, booleans, or inline arrays.
-    """
-    # Find the [pack] section (everything up to the next [] section or EOF)
-    pack_section_match = re.search(
-        r"^\[pack\](.*?)(?=^\[[^\[]|\Z)", text, re.DOTALL | re.MULTILINE
-    )
-    if not pack_section_match:
+    if "pack" not in data:
         raise ValueError("No [pack] section found in pack.toml")
-    section = pack_section_match.group(1)
 
-    def get(key: str):
-        m = re.search(rf'^{key}\s*=\s*"([^"]*)"', section, re.MULTILINE)
-        return m.group(1) if m else None
-
-    def get_array(key: str) -> list[str]:
-        m = re.search(rf"^{key}\s*=\s*\[([^\]]*)\]", section, re.MULTILINE)
-        if not m:
-            return []
-        return [v.strip().strip('"') for v in m.group(1).split(",") if v.strip().strip('"')]
-
+    pack = data["pack"]
     return {
-        "name": get("name"),
-        "version": get("version"),
-        "description": get("description"),
-        "authors": get_array("authors"),
-        "license": get("license"),
-        "repository": get("repository"),
-        "keywords": get_array("keywords"),
+        "name": pack.get("name"),
+        "version": pack.get("version"),
+        "description": pack.get("description"),
+        "authors": pack.get("authors", []),
+        "license": pack.get("license"),
+        "repository": pack.get("repository"),
+        "keywords": pack.get("keywords", []),
     }
 
 
@@ -100,7 +85,7 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         print(f"  SKIP {pack_name}: no pack.toml found", file=sys.stderr)
         return {}
 
-    meta = parse_pack_toml(pack_toml_path.read_text(encoding="utf-8"))
+    meta = parse_pack_toml(pack_toml_path)
 
     # Ensure pack.toml name matches the directory name to prevent registry inconsistencies.
     if meta["name"] and meta["name"] != pack_name:
