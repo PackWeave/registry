@@ -14,7 +14,9 @@ Then regenerates index.json as a flat catalog of all packs with latest_version
 set to the highest semver version present in each packs/{name}.json.
 """
 
+import argparse
 import json
+import re
 import sys
 import tomllib
 from pathlib import Path
@@ -26,14 +28,23 @@ from pathlib import Path
 REGISTRY_SCHEMA_VERSION = 1
 
 
-def parse_pack_toml(pack_toml_path: Path) -> dict:
-    """Parse a pack.toml file and extract metadata from the [pack] section."""
+_NAME_RE = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?$")
+_SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
+_VALID_TRANSPORTS = {"stdio", "http"}
+
+
+def parse_pack_toml_full(pack_toml_path: Path) -> dict:
+    """Parse a pack.toml file and return the full TOML dict."""
     with open(pack_toml_path, "rb") as f:
         data = tomllib.load(f)
-
     if "pack" not in data:
         raise ValueError("No [pack] section found in pack.toml")
+    return data
 
+
+def parse_pack_toml(pack_toml_path: Path) -> dict:
+    """Parse a pack.toml file and extract metadata from the [pack] section."""
+    data = parse_pack_toml_full(pack_toml_path)
     pack = data["pack"]
     return {
         "name": pack.get("name"),
@@ -44,6 +55,123 @@ def parse_pack_toml(pack_toml_path: Path) -> dict:
         "repository": pack.get("repository"),
         "keywords": pack.get("keywords", []),
     }
+
+
+def validate_pack(pack_toml_path: Path, pack_dir_name: str) -> list[str]:
+    """Validate a pack.toml file. Returns a list of error messages (empty = valid)."""
+    errors: list[str] = []
+
+    try:
+        data = parse_pack_toml_full(pack_toml_path)
+    except (ValueError, tomllib.TOMLDecodeError) as e:
+        return [f"{pack_dir_name}: {e}"]
+
+    pack = data["pack"]
+
+    # Required fields
+    for field in ("name", "version", "description"):
+        if field not in pack or not pack[field]:
+            errors.append(f"{pack_dir_name}: missing required field '{field}' in [pack]")
+
+    name = pack.get("name", "")
+    if name and not _NAME_RE.match(name):
+        errors.append(
+            f"{pack_dir_name}: invalid pack name '{name}' — "
+            "must be lowercase letters, digits, and hyphens only"
+        )
+    if name and name != pack_dir_name:
+        errors.append(
+            f"{pack_dir_name}: pack name '{name}' does not match directory name"
+        )
+
+    version = pack.get("version", "")
+    if version and not _SEMVER_RE.match(version):
+        errors.append(
+            f"{pack_dir_name}: invalid version '{version}' — must be X.Y.Z"
+        )
+
+    # Type checks for optional list fields
+    for field in ("authors", "keywords"):
+        val = pack.get(field)
+        if val is not None:
+            if not isinstance(val, list) or not all(isinstance(v, str) for v in val):
+                errors.append(f"{pack_dir_name}: '{field}' must be a list of strings")
+
+    # Server validation
+    servers = data.get("servers", [])
+    if not isinstance(servers, list):
+        errors.append(
+            f"{pack_dir_name}: 'servers' must use [[servers]] (array of tables), "
+            "not [servers]"
+        )
+        return errors
+
+    seen_server_names: set[str] = set()
+    for i, server in enumerate(servers):
+        srv_name = server.get("name")
+        if not srv_name:
+            errors.append(f"{pack_dir_name}: server #{i + 1} is missing 'name'")
+        elif not _NAME_RE.match(srv_name):
+            errors.append(
+                f"{pack_dir_name}: invalid server name '{srv_name}' — "
+                "must be lowercase letters, digits, and hyphens only"
+            )
+        elif srv_name in seen_server_names:
+            errors.append(
+                f"{pack_dir_name}: duplicate server name '{srv_name}' within pack"
+            )
+        else:
+            seen_server_names.add(srv_name)
+
+        transport = server.get("transport", "stdio")
+        if transport not in _VALID_TRANSPORTS:
+            errors.append(
+                f"{pack_dir_name}: server '{srv_name or f'#{i + 1}'}' has invalid "
+                f"transport '{transport}' — must be 'stdio' or 'http'"
+            )
+
+        # Validate command/url based on transport
+        if transport == "stdio" and not server.get("command"):
+            errors.append(
+                f"{pack_dir_name}: server '{srv_name or f'#{i + 1}'}' uses stdio "
+                "transport but is missing 'command'"
+            )
+        elif transport == "http" and not server.get("url"):
+            errors.append(
+                f"{pack_dir_name}: server '{srv_name or f'#{i + 1}'}' uses http "
+                "transport but is missing 'url'"
+            )
+
+    return errors
+
+
+def validate_unique_server_names(src_dir: Path) -> list[str]:
+    """Check that server names are globally unique across all packs."""
+    errors: list[str] = []
+    seen: dict[str, str] = {}  # server_name -> pack_name
+
+    for pack_dir in sorted(src_dir.iterdir()):
+        pack_toml_path = pack_dir / "pack.toml"
+        if not pack_dir.is_dir() or not pack_toml_path.exists():
+            continue
+        try:
+            data = parse_pack_toml_full(pack_toml_path)
+        except (ValueError, tomllib.TOMLDecodeError):
+            continue
+
+        for server in data.get("servers", []):
+            srv_name = server.get("name")
+            if not srv_name:
+                continue
+            if srv_name in seen:
+                errors.append(
+                    f"{pack_dir.name}: server name '{srv_name}' conflicts with "
+                    f"pack '{seen[srv_name]}'"
+                )
+            else:
+                seen[srv_name] = pack_dir.name
+
+    return errors
 
 
 def semver_key(version_str: str) -> tuple[int, ...]:
@@ -179,16 +307,52 @@ def regenerate_index(packs_dir: Path) -> dict:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate or validate the pack registry.")
+    parser.add_argument(
+        "--validate-only",
+        action="store_true",
+        help="Validate all packs without writing any files.",
+    )
+    args = parser.parse_args()
+
     repo_root = Path(__file__).parent.parent
     src_dir = repo_root / "src"
     packs_dir = repo_root / "packs"
     index_path = repo_root / "index.json"
 
-    packs_dir.mkdir(exist_ok=True)
-
     pack_names = sorted(
         p.name for p in src_dir.iterdir() if p.is_dir() and (p / "pack.toml").exists()
     )
+
+    # --- Validation pass ---
+    print(f"Validating {len(pack_names)} pack(s):")
+    all_errors: list[str] = []
+    for name in pack_names:
+        pack_errors = validate_pack(src_dir / name / "pack.toml", name)
+        if pack_errors:
+            all_errors.extend(pack_errors)
+            for err in pack_errors:
+                print(f"  ERROR: {err}", file=sys.stderr)
+        else:
+            print(f"  {name}: OK")
+
+    # Cross-pack checks
+    cross_errors = validate_unique_server_names(src_dir)
+    all_errors.extend(cross_errors)
+    for err in cross_errors:
+        print(f"  ERROR: {err}", file=sys.stderr)
+
+    if all_errors:
+        print(f"\nValidation failed with {len(all_errors)} error(s).", file=sys.stderr)
+        sys.exit(1)
+
+    print("Validation passed.\n")
+
+    if args.validate_only:
+        return
+
+    # --- Generation pass ---
+    packs_dir.mkdir(exist_ok=True)
 
     print(f"Processing {len(pack_names)} pack(s):")
     for name in pack_names:
