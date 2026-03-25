@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "rust-dev",
   "description": "System prompt and slash commands for Rust development: clippy, error handling, and idiomatic patterns",
   "authors": [

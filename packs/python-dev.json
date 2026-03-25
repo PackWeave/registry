@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "python-dev",
   "description": "System prompt and slash commands for Python development: best practices, typing, and tooling",
   "authors": [

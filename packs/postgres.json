@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "postgres",
   "description": "PostgreSQL database query access via MCP — read-only schema inspection and SQL execution",
   "authors": [

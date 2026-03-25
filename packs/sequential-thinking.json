@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "sequential-thinking",
   "description": "Structured chain-of-thought reasoning via MCP — break down complex problems step by step",
   "authors": [

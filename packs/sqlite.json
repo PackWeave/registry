@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "sqlite",
   "description": "SQLite database access via MCP — read, write, and analyze local SQLite databases",
   "authors": [
