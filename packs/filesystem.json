@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "filesystem",
   "description": "Read and write local files via the MCP filesystem server",
   "authors": [

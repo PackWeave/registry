@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "web-dev",
   "description": "Browser automation via Puppeteer MCP plus a web development system prompt",
   "authors": [

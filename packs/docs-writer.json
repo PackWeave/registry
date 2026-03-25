@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "docs-writer",
   "description": "System prompt and slash commands for technical writing: READMEs, API docs, and changelogs",
   "authors": [

@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "brave-search",
   "description": "Web and local search via the Brave Search API through MCP",
   "authors": [

@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "git-tools",
   "description": "Git operations via MCP plus a structured code review slash command",
   "authors": [

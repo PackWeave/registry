@@ -6,7 +6,7 @@ Run from the repository root:
     python3 scripts/generate.py
 
 For each pack under src/{name}/, this script:
-  1. Reads all files and builds an inline `files` map (relative path → content).
+  1. Reads all files and builds an inline `files` map (relative path -> content).
   2. Parses pack.toml to extract metadata (version, description, authors, etc.).
   3. Writes packs/{name}.json — creating it or updating the version entry in place.
 
@@ -18,6 +18,12 @@ import json
 import re
 import sys
 from pathlib import Path
+
+# Schema version for all generated registry files (index.json, packs/*.json).
+# Bump this when the registry format changes in a way that older clients cannot
+# safely ignore.  Clients compare this against their own supported version and
+# surface a clear "please upgrade weave" error when the registry is newer.
+REGISTRY_SCHEMA_VERSION = 1
 
 
 def parse_pack_toml(text: str) -> dict:
@@ -64,7 +70,7 @@ def semver_key(version_str: str) -> tuple[int, ...]:
 
 
 def build_files_map(pack_src_dir: Path) -> dict[str, str]:
-    """Walk src/{name}/ and return a flat map of relative-path → file content."""
+    """Walk src/{name}/ and return a flat map of relative-path -> file content."""
     files: dict[str, str] = {}
     for file_path in sorted(pack_src_dir.rglob("*")):
         if not file_path.is_file():
@@ -136,6 +142,7 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
     versions.sort(key=lambda v: semver_key(v["version"]), reverse=True)
 
     pack_metadata = {
+        "schema_version": REGISTRY_SCHEMA_VERSION,
         "name": meta["name"] or pack_name,
         "description": meta["description"] or "",
         "authors": meta["authors"],
@@ -150,7 +157,7 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
         f.write("\n")
 
     latest = max(versions, key=lambda v: semver_key(v["version"]))["version"]
-    print(f"  {pack_name} → {version} (latest: {latest})")
+    print(f"  {pack_name} -> {version} (latest: {latest})")
 
     return {
         "name": pack_metadata["name"],
@@ -161,8 +168,11 @@ def process_pack(src_dir: Path, packs_dir: Path, pack_name: str) -> dict:
 
 
 def regenerate_index(packs_dir: Path) -> dict:
-    """Build index.json from all packs/*.json files."""
-    index: dict[str, dict] = {}
+    """Build index.json from all packs/*.json files.
+
+    Returns the full envelope: ``{"schema_version": N, "packs": {…}}``.
+    """
+    packs: dict[str, dict] = {}
     for pack_json in sorted(packs_dir.glob("*.json")):
         with open(pack_json, encoding="utf-8") as f:
             meta = json.load(f)
@@ -171,13 +181,16 @@ def regenerate_index(packs_dir: Path) -> dict:
         if not versions:
             continue
         latest = max(versions, key=lambda v: semver_key(v["version"]))["version"]
-        index[name] = {
+        packs[name] = {
             "name": meta.get("name", name),
             "description": meta.get("description", ""),
             "keywords": meta.get("keywords", []),
             "latest_version": latest,
         }
-    return index
+    return {
+        "schema_version": REGISTRY_SCHEMA_VERSION,
+        "packs": packs,
+    }
 
 
 def main() -> None:
@@ -201,7 +214,7 @@ def main() -> None:
     with open(index_path, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"  index.json — {len(index)} pack(s)")
+    print(f"  index.json — {len(index['packs'])} pack(s), schema_version={index['schema_version']}")
     print("\nDone.")
 
 

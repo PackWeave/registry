@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "fetch",
   "description": "HTTP fetch tool via MCP — retrieve web pages and API responses as markdown or raw text",
   "authors": [
