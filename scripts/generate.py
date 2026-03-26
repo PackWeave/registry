@@ -39,6 +39,8 @@ def parse_pack_toml_full(pack_toml_path: Path) -> dict:
         data = tomllib.load(f)
     if "pack" not in data:
         raise ValueError("No [pack] section found in pack.toml")
+    if not isinstance(data["pack"], dict):
+        raise ValueError("[pack] must be a table, not a scalar")
     return data
 
 
@@ -68,24 +70,27 @@ def validate_pack(pack_toml_path: Path, pack_dir_name: str) -> list[str]:
 
     pack = data["pack"]
 
-    # Required fields
+    # Required fields — must be present and must be strings
     for field in ("name", "version", "description"):
-        if field not in pack or not pack[field]:
+        val = pack.get(field)
+        if not val:
             errors.append(f"{pack_dir_name}: missing required field '{field}' in [pack]")
+        elif not isinstance(val, str):
+            errors.append(f"{pack_dir_name}: '{field}' must be a string")
 
     name = pack.get("name", "")
-    if name and not _NAME_RE.match(name):
+    if isinstance(name, str) and name and not _NAME_RE.match(name):
         errors.append(
             f"{pack_dir_name}: invalid pack name '{name}' — "
             "must be lowercase letters, digits, and hyphens only"
         )
-    if name and name != pack_dir_name:
+    if isinstance(name, str) and name and name != pack_dir_name:
         errors.append(
             f"{pack_dir_name}: pack name '{name}' does not match directory name"
         )
 
     version = pack.get("version", "")
-    if version and not _SEMVER_RE.match(version):
+    if isinstance(version, str) and version and not _SEMVER_RE.match(version):
         errors.append(
             f"{pack_dir_name}: invalid version '{version}' — must be X.Y.Z"
         )
@@ -108,6 +113,12 @@ def validate_pack(pack_toml_path: Path, pack_dir_name: str) -> list[str]:
 
     seen_server_names: set[str] = set()
     for i, server in enumerate(servers):
+        if not isinstance(server, dict):
+            errors.append(
+                f"{pack_dir_name}: server #{i + 1} must be a table "
+                f"(got {type(server).__name__})"
+            )
+            continue
         srv_name = server.get("name")
         if not srv_name:
             errors.append(f"{pack_dir_name}: server #{i + 1} is missing 'name'")
@@ -159,7 +170,13 @@ def validate_unique_server_names(src_dir: Path) -> list[str]:
         except (ValueError, tomllib.TOMLDecodeError):
             continue
 
-        for server in data.get("servers", []):
+        servers = data.get("servers")
+        if not isinstance(servers, list):
+            continue
+
+        for server in servers:
+            if not isinstance(server, dict):
+                continue
             srv_name = server.get("name")
             if not srv_name:
                 continue
@@ -336,11 +353,12 @@ def main() -> None:
         else:
             print(f"  {name}: OK")
 
-    # Cross-pack checks
-    cross_errors = validate_unique_server_names(src_dir)
-    all_errors.extend(cross_errors)
-    for err in cross_errors:
-        print(f"  ERROR: {err}", file=sys.stderr)
+    # Cross-pack checks (skip if per-pack validation already failed)
+    if not all_errors:
+        cross_errors = validate_unique_server_names(src_dir)
+        all_errors.extend(cross_errors)
+        for err in cross_errors:
+            print(f"  ERROR: {err}", file=sys.stderr)
 
     if all_errors:
         print(f"\nValidation failed with {len(all_errors)} error(s).", file=sys.stderr)
