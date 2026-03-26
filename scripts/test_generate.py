@@ -12,7 +12,6 @@ sys.path.insert(0, str(Path(__file__).parent))
 from generate import (
     build_files_map,
     parse_pack_toml,
-    parse_pack_toml_full,
     process_pack,
     regenerate_index,
     semver_key,

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "src/**"
+      - "scripts/generate.py"
 
   # Allow manual re-generation of all packs from the Actions tab
   workflow_dispatch:
@@ -24,7 +25,7 @@ jobs:
           python-version: "3.12"
 
       - name: Regenerate packs/*.json and index.json
-        run: python3 scripts/generate.py
+        run: python scripts/generate.py
 
       - name: Commit generated files
         run: |

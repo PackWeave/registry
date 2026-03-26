@@ -18,10 +18,10 @@ jobs:
           python-version: "3.12"
 
       - name: Validate all packs
-        run: python3 scripts/generate.py --validate-only
+        run: python scripts/generate.py --validate-only
 
       - name: Install test dependencies
-        run: pip install pytest
+        run: python -m pip install pytest
 
       - name: Run tests
         run: python -m pytest scripts/test_generate.py -v
